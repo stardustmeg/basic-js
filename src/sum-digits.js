@@ -17,14 +17,9 @@ function getSumOfDigits(n) {
   let str = n.toString();
 
   for (let i = 0; i < str.length; i++) {
-    let num = +str[i];
-    result = result + num;
+    result = result + +str[i];
   }
-  if (result >= 10) {
-    return getSumOfDigits(result);
-  } else {
-    return result;
-  }
+  return result >= 10 ? getSumOfDigits(result) : result;
 }
 
 module.exports = {
