@@ -26,9 +26,8 @@ function createDreamTeam(members) {
 
       result = `${result}${firstLetter}`;
     }
-    result = sortAlpha(result);
   }
-  return result;
+  return sortAlpha(result);
 }
 
 function sortAlpha(word) {
