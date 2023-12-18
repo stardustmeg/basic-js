@@ -28,21 +28,19 @@ function repeater(str, options) {
   let additionRepeatTimes = options.additionRepeatTimes || 1;
   let additionSeparator = options.additionSeparator || "|";
 
-  for (let i = 0; i < repeatTimes; i++) {
-    repeatedString += str;
+  // 1. create new array for Addition (repeat it times)
+  // 2. fill each element with addition
+  // 3. join elements into a string with additionSeparator
+  let repeatedAddition = new Array(additionRepeatTimes)
+    .fill(addition)
+    .join(additionSeparator);
 
-    for (let j = 0; j < additionRepeatTimes; j++) {
-      repeatedString += addition;
-
-      if (j < additionRepeatTimes - 1) {
-        repeatedString += additionSeparator;
-      }
-    }
-
-    if (i < repeatTimes - 1) {
-      repeatedString += separator;
-    }
-  }
+  // 1. create new array (repeat it times)
+  // 2. fill each elemnt again
+  // 3. join with its separator
+  repeatedString = new Array(repeatTimes)
+    .fill(str + repeatedAddition)
+    .join(separator);
 
   return repeatedString;
 }
