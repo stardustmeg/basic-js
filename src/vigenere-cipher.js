@@ -53,7 +53,7 @@ class VigenereCipheringMachine {
     return result;
   }
 
-  decrypt() {
+  decrypt(message, key) {
     // throw new NotImplementedError('Not implemented');
     // // remove line with error and write your code here
 
@@ -64,11 +64,11 @@ class VigenereCipheringMachine {
     message = message.toUpperCase();
     key = key.toUpperCase();
 
+    let result = "";
+  let keyIndex = 0;
+
   let codeA = 'A'.charCodeAt(0);
   let abcCount = 26;
-
-  let result = "";
-  let keyIndex = 0;
 
   for (let i = 0; i < message.length; i++) {
     let char = message[i];
