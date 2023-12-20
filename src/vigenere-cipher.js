@@ -1,4 +1,4 @@
-const { NotImplementedError } = require('../extensions/index.js');
+const { NotImplementedError } = require("../extensions/index.js");
 
 /**
  * Implement class VigenereCipheringMachine that allows us to create
@@ -20,11 +20,7 @@ const { NotImplementedError } = require('../extensions/index.js');
  *
  */
 class VigenereCipheringMachine {
-
   encrypt(message, key) {
-    // throw new NotImplementedError('Not implemented');
-    // // remove line with error and write your code here
-
     // must throw an Error if no args
     if (!message || !key) {
       throw new Error("Incorrect arguments!");
@@ -35,16 +31,18 @@ class VigenereCipheringMachine {
 
     let result = "";
     let keyIndex = 0;
-    let codeA = 'A'.charCodeAt(0);
+    let codeA = "A".charCodeAt(0);
     let abcCount = 26;
 
     for (let i = 0; i < message.length; i++) {
       let char = message[i];
-  
+
       if (/^[A-Z]$/.test(char)) {
         // calculate shift
         let shift = key[keyIndex % key.length].charCodeAt(0) - codeA;
-        result += String.fromCharCode(((char.charCodeAt(0) - codeA + shift) % abcCount) + codeA);
+        result += String.fromCharCode(
+          ((char.charCodeAt(0) - codeA + shift) % abcCount) + codeA
+        );
         keyIndex++;
       } else {
         result += char;
@@ -54,40 +52,36 @@ class VigenereCipheringMachine {
   }
 
   decrypt(message, key) {
-    // throw new NotImplementedError('Not implemented');
-    // // remove line with error and write your code here
-
     if (!message || !key) {
       throw new Error("Incorrect arguments!");
     }
- 
+
     message = message.toUpperCase();
     key = key.toUpperCase();
 
     let result = "";
-  let keyIndex = 0;
+    let keyIndex = 0;
 
-  let codeA = 'A'.charCodeAt(0);
-  let abcCount = 26;
+    let codeA = "A".charCodeAt(0);
+    let abcCount = 26;
 
-  for (let i = 0; i < message.length; i++) {
-    let char = message[i];
+    for (let i = 0; i < message.length; i++) {
+      let char = message[i];
 
-    if (/^[A-Z]$/.test(char)) {
-      let shift = key[keyIndex % key.length].charCodeAt(0) - codeA;
-      result += String.fromCharCode(((char.charCodeAt(0) - codeA - shift + abcCount) % abcCount) + codeA);
-      keyIndex++;
-    } else {
-      result += char;
+      if (/^[A-Z]$/.test(char)) {
+        let shift = key[keyIndex % key.length].charCodeAt(0) - codeA;
+        result += String.fromCharCode(
+          ((char.charCodeAt(0) - codeA - shift + abcCount) % abcCount) + codeA
+        );
+        keyIndex++;
+      } else {
+        result += char;
+      }
     }
+    return result;
   }
-
-  return result;
-  }
-
-
 }
 
 module.exports = {
-  VigenereCipheringMachine
+  VigenereCipheringMachine,
 };
