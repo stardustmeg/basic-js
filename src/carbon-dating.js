@@ -1,4 +1,4 @@
-const { NotImplementedError } = require('../extensions/index.js');
+const { NotImplementedError } = require("../extensions/index.js");
 
 const MODERN_ACTIVITY = 15;
 const HALF_LIFE_PERIOD = 5730;
@@ -18,29 +18,26 @@ const HALF_LIFE_PERIOD = 5730;
  *
  */
 function dateSample(sampleActivity) {
-  // throw new NotImplementedError('Not implemented');
-  // // remove line with error and write your code here
-
   // should return false on wrong type
-  if (typeof sampleActivity !== 'string') {
+  if (typeof sampleActivity !== "string") {
     return false;
   }
 
-    // string to a number
-    let activity = +sampleActivity;
-  
-    // check it's in range
-    if (activity > 0 && activity < MODERN_ACTIVITY) {
-      let age = Math.ceil(Math.log(MODERN_ACTIVITY / activity) * HALF_LIFE_PERIOD / 0.693);
-      
-      return age;
-    } else {
-      // invalid
-      return false;
-    }
-  }
+  // string to a number
+  let activity = +sampleActivity;
 
+  // check it's in range
+  if (activity > 0 && activity < MODERN_ACTIVITY) {
+    let age = Math.ceil(
+      (Math.log(MODERN_ACTIVITY / activity) * HALF_LIFE_PERIOD) / 0.693
+    );
+    return age;
+  } else {
+    // invalid
+    return false;
+  }
+}
 
 module.exports = {
-  dateSample
+  dateSample,
 };
