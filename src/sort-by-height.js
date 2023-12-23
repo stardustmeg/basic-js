@@ -11,9 +11,9 @@ const { NotImplementedError } = require("../extensions/index.js");
  *
  * The result should be [-1, 150, 160, 170, -1, -1, 180, 190]
  */
-function sortByHeight(arr) {
+function sortByHeight(arr = []) {
   // replace for loop and sort
-  let sortedPositiveArr = arr
+  const sortedPositiveArr = arr
     .filter((value) => value !== -1)
     .sort((a, b) => a - b);
 
