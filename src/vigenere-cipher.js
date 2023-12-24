@@ -20,6 +20,10 @@ const { NotImplementedError } = require("../extensions/index.js");
  *
  */
 class VigenereCipheringMachine {
+  constructor(direct) {
+    this.isDirect = direct !== undefined ? direct : true;
+  }
+
   encrypt(message, key) {
     // must throw an Error if no args
     if (!message || !key) {
@@ -31,15 +35,15 @@ class VigenereCipheringMachine {
 
     let result = "";
     let keyIndex = 0;
-    let codeA = "A".charCodeAt(0);
-    let abcCount = 26;
+    const codeA = "A".charCodeAt(0);
+    const abcCount = 26;
 
     for (let i = 0; i < message.length; i++) {
       let char = message[i];
 
       if (/^[A-Z]$/.test(char)) {
         // calculate shift
-        let shift = key[keyIndex % key.length].charCodeAt(0) - codeA;
+        const shift = key[keyIndex % key.length].charCodeAt(0) - codeA;
         result += String.fromCharCode(
           ((char.charCodeAt(0) - codeA + shift) % abcCount) + codeA
         );
@@ -48,7 +52,7 @@ class VigenereCipheringMachine {
         result += char;
       }
     }
-    return result;
+    return this.isDirect ? result : result.split("").reverse().join("");
   }
 
   decrypt(message, key) {
@@ -61,15 +65,14 @@ class VigenereCipheringMachine {
 
     let result = "";
     let keyIndex = 0;
-
-    let codeA = "A".charCodeAt(0);
-    let abcCount = 26;
+    const codeA = "A".charCodeAt(0);
+    const abcCount = 26;
 
     for (let i = 0; i < message.length; i++) {
       let char = message[i];
 
       if (/^[A-Z]$/.test(char)) {
-        let shift = key[keyIndex % key.length].charCodeAt(0) - codeA;
+        const shift = key[keyIndex % key.length].charCodeAt(0) - codeA;
         result += String.fromCharCode(
           ((char.charCodeAt(0) - codeA - shift + abcCount) % abcCount) + codeA
         );
@@ -78,7 +81,7 @@ class VigenereCipheringMachine {
         result += char;
       }
     }
-    return result;
+    return this.isDirect ? result : result.split("").reverse().join("");
   }
 }
 
